@@ -1,0 +1,121 @@
+/* Basic styling */
+/* Draw the lines */
+.jOrgChart {
+  margin-top: 5px;
+}
+.jOrgChart .line {
+  height: 15px;
+  width: 2px;
+}
+.jOrgChart .down {
+  background-color: #bbb;
+  margin: 0px auto;
+}
+
+.jOrgChart .top {
+  border-top: 2px solid #bbb;
+}
+
+.jOrgChart .left {
+  border-right: 2px solid #bbb;
+}
+
+.jOrgChart .right {
+  border-left: 2px solid transparent;
+}
+
+/* node cell */
+.jOrgChart td {
+  text-align: center;
+  vertical-align: top;
+  padding: 0;
+}
+
+/* The node */
+/* .jOrgChart .node:hover,.jOrgChart .node:active,.jOrgChart .node:focus,
+.childrens:hover,.childrens:active,.childrens:focus {
+  border: 2px rgb(109, 172, 62) solid !important;
+} */
+/* jQuery drag 'n drop */
+
+.drag-active {
+  border-style: dotted !important;
+}
+
+.drop-hover {
+  border-style: solid !important;
+  border-color: rgb(136, 127, 121) !important;
+}
+
+a {
+  font-size: 16px;
+}
+table {
+  margin: auto;
+}
+.node a {
+  cursor: default;
+  border-radius: 3px;
+}
+.childrens a {
+  writing-mode: vertical-lr;
+  height: 130px;
+  border-radius: 3px;
+}
+.childrens {
+  background-color: #fff;
+  border: 2px #bbb solid;
+  display: inline-block;
+  z-index: 10;
+  border-radius: 4px;
+  margin: 0 8px;
+  padding: 5px;
+}
+.jOrgChart .node {
+  background-color: #fff;
+  border: 2px #bbb solid;
+  display: inline-block;
+  z-index: 10;
+  width: auto;
+  min-width: 90px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 4px;
+  margin: 0 8px;
+}
+.lightorange .node a {
+  color: #FF5722;
+}
+.lightgreen .node a {
+  color: #1ab394;
+}
+.lightorange .node {
+  border-color: #FF5722;
+}
+.lightgreen .node,.lightgreen .left,.lightgreen .right {
+  border-color: #1ab394;
+}
+.lightgreen .down {
+  background-color: #1ab394;
+  position: relative;
+}
+.lightorange {
+  position: relative;
+}
+.lightblue .childrens,.lightblue .left,.lightblue .right {
+  border-color: #39aef5;
+}
+.lightblue .childrens:hover {
+    border-color: #337ab7;
+}
+.lightblue .childrens a {
+  background-color: #39aef5;
+  color: #fff;
+  padding: 10px;
+}
+.lightblue .childrens:hover a {
+  background-color: #337ab7;
+}
+.lightblue .down {
+  background-color: #39aef5;
+}

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width, height=device-height">
+    <title></title>
+    <!--外部文件-->
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+
+    <script type="text/javascript" src="libs/layui/layui.all.js"></script>
+    <script type="text/javascript" src="libs/vue/vue@2.6.11.js"></script>
+    <script type="text/javascript" src="libs/jquery/jquery-3.3.1.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <!--自己写的文件-->
+    <link rel="stylesheet" href="css/one.css">
+
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div id="chart1">
+        <b>文本 ( {{}} ):</b>
+        <p>{{ block.one }}</p>
+        <p>{{ block.one }}</p>
+      </div>
+
+      <h3>简单介绍</h3>
+      <div id="app">
+        <b>文本 ( {{}} ):</b>
+        <p>{{ message1 }}</p>
+        <p>{{ message2 }}</p>
+      </div>
+
+      <div id="app-2">
+        <b>悬停提示 ( v-bind:title="message" ):</b>
+        <span v-bind:title="message">
+          鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+      </div>
+
+      <div id="app-3">
+        <b>是否显示 (v-if="seen"):</b>
+        <p v-if="seen">现在你看到我了</p>
+      </div>
+
+      <div id="app-4">
+        <b>循环列表(v-for):</b>
+        <ol>
+          <li v-for="todo in todos">
+            {{ todo.text }}
+          </li>
+        </ol>
+      </div>
+
+      <div id="app-5">
+        <b>点击反转/替换 (v-on:click="reverseMessage"):</b>
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">反转消息</button>
+      </div>
+
+      <div id="app-6">
+        <b>双向绑定 (v-model="message"):</b>
+        <p>{{ message }}</p>
+        <input v-model="message">
+      </div>
+      
+      <div id="app-7">
+        <b>循环组件 (v-for="item in groceryList"):</b>
+        <ol>
+          <todo-item
+            v-for="item in groceryList"
+            v-bind:todo="item"
+            v-bind:key="item.id"
+          ></todo-item>
+        </ol>
+      </div>
+
+
+      <h3>模板语法</h3>
+      <div id="app_1">
+        <b>阻止更新:</b>
+        <p>{{ foo }}</p>
+        <!-- 这里的 `foo` 不会更新！ -->
+        <button v-on:click="foo = 'baz'">Change it</button>
+      </div>
+
+      <div v-once id="bojsshow_1">
+        <p><b>HTML代码:</b> <span v-html="rawHtml"></span></p>
+
+        <b>(v-bind:class):</b>
+        <div v-bind:class="color">class为.blue，再在css中写.blue{ color:blue; }</div>
+
+        <b>使用 JavaScript 表达式:</b>
+        <b>数字相加:</b>
+        {{ number + 1 }}
+        <b>三元表达式:</b>
+        {{ ok ? 'YES' : 'NO' }}
+        <b>文字反转:</b>
+        {{ message.split('').reverse().join('') }}
+
+        <b>指令: v-if="seen":</b>
+        <p v-if="seen">seen: true => 显示</p>
+        <b>参数: v-bind:href="href":</b>
+        <a v-bind:href="href">url: 'http://www.baidu.com'</a><br/>
+        <a :href="href">url: 'http://www.baidu.com'</a>
+        <b>参数: v-on:click:</b>
+        <div v-on:click="click1.stop">v-on:click</div>
+        <b>文字反转:</b>
+        <div @click="click2">@click</div>
+        <b>动态参数: v-bind:[attributeName]="url":</b>
+        <a v-bind:[attributeName]="url"> attributename:url </a>
+        <b>动态参数: v-on:[eventName]="doSomething":</b>
+        <input v-on:[eventName]="doSomething"/>
+        <b>阻止自动补全: v-on:submit.native:</b>
+        <form autocomplete="off" @submit.prevent="onSubmit1"><Input type="text" placeholder="阻止自动补全"/></form>
+        <form autocomplete="off" v-on:submit.native="onSubmit2"><Input type="text" placeholder="阻止自动补全"/></form>
+      </div>
+
+
+      <div id="app_2">
+        <h3>计算属性</h3>
+        <b>不是响应式依赖 (computed:{}):</b>
+        <p>时间戳: {{Date.now()}} </p>
+
+        <b>侦听属性 (watch:{}):</b>
+        <p>全名: {{ fullName }} </p>
+        <b>getter/setter (getter:{}):</b>
+        <p>全名: {{ quanming }} </p>
+      </div>
+      
+      <div id="app_3">
+        <h3>侦听器axios</h3>
+        <div id="watch-example">
+          <p>
+            Ask a yes/no question:
+            <input v-model="question">
+          </p>
+          <p>{{ answer }}</p>
+        </div>
+      </div>
+
+      
+      <div id="app_4">
+        <b>动态地切换class ( v-bind:class="{ active: isActive }" ):搞不懂</b>
+        <div
+          class="static"
+          v-bind:class="{ active: isActive, 'text-danger': hasError }"
+        ></div>
+        <div v-bind:class="classObject"></div>
+        <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+        <div v-bind:class="[{ active: isActive }, errorClass]"></div>
+
+        <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">绑定内联样式</div>
+        <div v-bind:style="styleObject">绑定内联样式</div>
+      </div>
+
+      
+      <h3>列表渲染v-if</h3>
+      <b>v-if</b>
+      <h1 v-if="awesome">Vue is awesome!</h1>
+      <h1 v-else>Oh no 😢</h1>
+      <div id="app_5">
+        <b>v-else</b>
+        <div v-if="Math.random() > 0.5">
+          Now you see me
+        </div>
+        <div v-else>
+          Now you don't
+        </div>
+
+        <b>v-else-if</b>
+        <div v-if="type === 'A'">
+          A
+        </div>
+        <div v-else-if="type === 'B'">
+          B
+        </div>
+        <div v-else-if="type === 'C'">
+          C
+        </div>
+        <div v-else>
+          Not A/B/C
+        </div>
+
+        <template v-if="loginType === 'username'">
+          <label>Username</label>
+          <input placeholder="Enter your username" key="email-input">
+        </template>
+        <template v-else>
+          <label>Email</label>
+          <input placeholder="Enter your email address" key="email-input">
+        </template>
+      </div>
+
+
+      <ul id="app_6">
+        <h3>列表渲染v-for</h3>
+        <b>列表</b>
+        <li v-for="item in items" :key="item.message">
+          {{ item.message }}
+        </li>
+
+        <b>索引</b>
+        <li v-for="(item, index) in items">
+          {{ parentMessage }} - {{ index }} - {{ item.message }}
+        </li>
+
+        <b>遍历一个对象的 property</b>
+        <li v-for="value in object">
+          {{ value }}
+        </li>
+
+        <b>键名</b>
+        <div v-for="(value, name) in object">
+          {{ name }}: {{ value }}
+        </div>
+        
+        <b>用第三个参数作为索引</b>
+        <div v-for="(value, name, index) in object">
+          {{ index }}. {{ name }}: {{ value }}
+        </div>
+
+        <b>过滤</b>
+        <li v-for="n in evenNumbers">{{ n }}</li>
+        <b>在计算属性不适用的情况下</b>
+        <ul v-for="set in sets">
+          <li v-for="n in even(set)">{{ n }}</li>
+        </ul>
+
+        <b>整数</b>
+        <div>
+          <span v-for="n in 10">{{ n }} </span>
+        </div>
+
+        <b>v-for 与 v-if 一同使用</b>
+        <li v-for="todo in todos" v-if="!todo.isComplete">
+          {{ todo.todo }}
+        </li>
+
+        <b>v-for 与 v-if 一同使用</b>
+        <ul v-if="todos.length">
+          <li v-for="todo in todos">
+            {{ todo.todo }}
+          </li>
+        </ul>
+        <p v-else>No todos left!</p>
+      </ul>
+
+      
+      <ul id="app_7">
+        <h3>事件处理</h3>
+        <b>点击次数</b>
+          <button v-on:click="counter += 1">Add 1</button>
+          <p>The button above has been clicked {{ counter }} times.</p>
+
+        <b>greet是methods:{}里 用来调用方法的:</b>
+          <button v-on:click="greet">Greet</button>
+
+        <b>在内联 JavaScript 语句中调用方法</b>
+          <button v-on:click="say('hi')">Say hi</button>
+          <button v-on:click="say('what')">Say what</button>
+
+        <b>特殊变量 $event 把它传入方法</b>
+          <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+            Submit
+          </button>
+
+        <b>事件修饰符</b>
+        <b>阻止单击事件继续传播</b>
+          <a v-on:click.stop="doThis">doThis</a>
+        <b>提交事件不再重载页面</b>
+          <form v-on:submit.prevent="doThis">
+            <a v-on:click="doThis">doThis</a>
+          </form>
+        <b>修饰符可以串联</b>
+          <a v-on:click.stop.prevent="doThis">doThis</a>
+        <b>只有修饰符</b>
+          <form v-on:submit.prevent>
+            <a v-on:click="doThis">doThis</a>
+          </form>
+        <b>添加事件监听器时使用事件捕获模式(即内部元素触发的事件先在此处理，然后才交由内部元素进行处理)</b>
+          <div v-on:click.capture="doThis">doThis</div>
+        <b>只当在 event.target 是当前元素自身时触发处理函数(即事件不是从内部元素触发的)</b>
+          <div v-on:click.self="doThis">doThis</div>
+
+        <b>点击事件将只会触发一次</b>
+          <a v-on:click.once="doThis">doThis</a>
+
+        <b>.passive -> 滚动行为立即触发</b>
+          <div v-on:scroll.passive="onScroll">...</div>
+
+        <b>回车触发</b>
+          <input v-on:keyup.enter="doThis">
+      </ul>
+
+
+      <ul id="app_8">
+        <h3>表单输入绑定</h3>
+        <b>文本</b>
+          <input v-model="textMessage" placeholder="edit me">
+          <p>Message is: {{ textMessage }}</p>
+
+        <b>多行文本</b>
+          <span>Multiline message is:</span>
+          <p style="white-space: pre-line;">{{ textareaMessage }}</p>
+          <textarea v-model="textareaMessage" placeholder="add multiple lines"></textarea>
+
+          <input type="checkbox" id="checkbox" v-model="checked">
+
+        <b>复选框</b>
+          <label for="checkbox">{{ checked }}</label>
+
+        <b>多个复选框，绑定到同一个数组</b>
+          <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+          <label for="jack">Jack</label>
+          <input type="checkbox" id="john" value="John" v-model="checkedNames">
+          <label for="john">John</label>
+          <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+          <label for="mike">Mike</label>
+          <br>
+          <span>Checked names: {{ checkedNames }}</span>
+
+          <b>单选按钮</b>
+          <div id="example-4">
+            <input type="radio" id="one" value="One" v-model="picked">
+            <label for="one">One</label>
+            <br>
+            <input type="radio" id="two" value="Two" v-model="picked">
+            <label for="two">Two</label>
+            <br>
+            <span>Picked: {{ picked }}</span>
+          </div>
+          
+          <b>单选按钮</b>
+            <select v-model="selected">
+              <option disabled value="">请选择</option>
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+            </select>
+            <span>Selected: {{ selected }}</span>
+
+          <b>单选按钮</b>
+            <select v-model="selected" multiple style="width: 50px;">
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+            </select>
+            <br>
+            <span>Selected: {{ selected2 }}</span>
+
+          <b>用 v-for 渲染的动态选项</b>
+            <select v-model="selected3">
+              <option v-for="option in options" v-bind:value="option.value">
+                {{ option.text }}
+              </option>
+            </select>
+            <span>Selected: {{ selected3 }}</span>
+
+            <input type="radio" v-model="picked1" value="a">
+            <input type="checkbox" v-model="toggle">
+            <select v-model="selected">
+              <option value="abc">ABC</option>
+            </select>
+
+          <b>v-model 绑定的值通常是静态字符串</b>
+            <!-- 当选中时，`picked` 为字符串 "a" -->
+            <input type="radio" v-model="picked2" value="a">
+
+            <!-- `toggle` 为 true 或 false -->
+            <input type="checkbox" v-model="toggle1">
+
+            <!-- 当选中第一个选项时，`selected` 为字符串 "abc" -->
+            <select v-model="selected4">
+              <option value="abc">ABC</option>
+            </select>
+      </ul>
+
+      
+      <ul id="app_9">
+        <h3>组件基础</h3>
+        <b>组件是可复用的 Vue 实例</b>
+          <button-counter></button-counter>
+          <button-counter></button-counter>
+          <button-counter></button-counter>
+
+        <b>通过 Prop 向子组件传递数据</b>
+          <blog-post title="My journey with Vue"></blog-post>
+          <blog-post title="Blogging with Vue"></blog-post>
+          <blog-post title="Why Vue is so fun"></blog-post>
+
+        <b>为每篇博文渲染一个组件</b>
+          <blog-post
+            v-for="post in posts"
+            v-bind:key="post.id"
+            v-bind:title="post.title"
+          ></blog-post>
+
+        <b>重构组件,变成一个单独的 post prop</b>
+          <blog-post2
+            v-for="post in posts"
+            v-bind:key="post.id"
+            v-bind:post="post"
+          ></blog-post2>
+
+        <b>监听子组件事件</b>
+          <div :style="{ fontSize: postFontSize + 'em' }">
+            <blog-post3
+              v-for="post in posts"
+              v-bind:key="post.id"
+              v-bind:post="post"
+              v-on:enlarge-text="postFontSize += 0.1"
+            ></blog-post3>
+          </div>
+
+        <b>通过 $event 访问到被抛出的这个值</b>
+          <div :style="{ fontSize: postFontSize + 'em' }">
+            <blog-post4
+              v-for="post in posts"
+              v-bind:key="post.id"
+              v-bind:post="post"
+              v-on:enlarge-text="postFontSize += $event"
+            ></blog-post4>
+          </div>
+
+          <b>事件处理函数是一个方法 </b>
+          <div :style="{ fontSize: postFontSize + 'em' }">
+            <blog-post5
+              v-for="post in posts"
+              v-bind:key="post.id"
+              v-bind:post="post"
+              v-on:enlarge-text="onEnlargeText"
+            ></blog-post5>
+          </div>
+
+      </ul>
+        
+  </div>
+</body>
+
+<script type="text/javascript" src="js/one.js"></script>
+
+</html> 

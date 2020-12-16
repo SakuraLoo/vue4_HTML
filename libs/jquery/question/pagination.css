@@ -1,0 +1,76 @@
+@charset "UTF-8";
+.M-box {
+    position: relative;
+    text-align: center;
+    zoom: 1;
+}
+.M-box:before,.M-box:after {
+    content:"";
+    display:table;
+}
+.M-box:after {
+    clear:both;
+    overflow:hidden;
+}
+.M-box span {
+    float: left;
+    /*margin:0 5px;*/
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: #bdbdbd;
+    font-size: 14px;
+}
+.M-box .active {
+    float: left;
+    /*margin:0 5px;*/
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background: #555555;
+    color: #fff;
+    font-size: 14px;
+}
+.M-box a {
+    float: left;
+    /*margin:0 5px;*/
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    color: #bdbdbd;
+    font-size: 14px;
+    text-decoration: none;
+    margin-right: -2px;
+}
+.M-box a:hover {
+    color:#fff;
+    background: #555555;
+}
+.M-box .next,.M-box .prev,.M-box1 .next,.M-box1 .prev {
+    font-family: "Simsun";
+    font-size: 16px;
+    font-weight: bold;
+}
+.M-box .now,.M-box .count {
+    padding:0 5px;
+    color:#f00;
+}
+
+.M-box input {
+    float: left;
+    margin:0 5px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    outline: none;
+    color: #bdbdbd;
+    font-size: 14px;
+}
+.M-box .jump-btn {
+    width: 38px;
+}

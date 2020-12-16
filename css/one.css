@@ -1,0 +1,39 @@
+body {
+  background-color: #eee;
+}
+div {
+  margin-bottom: 10px;
+}
+
+.blue {
+  color: rgb(23, 212, 212);
+}
+
+.container {
+  width: 70%;
+  margin: 10px auto;
+  background-color: #fff;
+  padding: 20px 80px;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+b {
+  position:relative;
+  display: block;
+  margin-top: 7px;
+  padding-left: 10px;
+}
+b:before {
+  content: "";
+  position: absolute;
+  top: calc(50% - 3px);
+  left: 0;
+  width: 7px;
+  height: 7px;
+  background-color: #000;
+  border-radius: 50%;
+}
+h3 {
+  color: rgb(33, 141, 230);
+}
